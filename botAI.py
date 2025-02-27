@@ -39,9 +39,10 @@ def enviarMensagem(mensagem, listaMensagens=[]):
     listaMensagens.append(
         {"role": "user", "content": mensagem}    
     )
+
     resposta = openai.ChatCompletion.create(
         model = "gpt-4o-mini",
-        messages = listaMensagens,
+        messages = listaMensagens
     )
 
     return resposta["choices"][0]["message"]
