@@ -5,11 +5,15 @@ import os
 import psutil
 from dotenv import load_dotenv
 
+from openai import OpenAI
+
 load_dotenv(override=True)
 
 st.set_page_config(page_title="Pergunte que o ArqBot responde!!!")
 
-openai.api_key = os.getenv("chaveApi")
+#openai.api_key = os.getenv("chaveApi")
+
+client = OpenAI(api_key=os.getenv("chaveApi"))
 
 # Instrucoes iniciais para o Bot
 assistant_instructions = {
@@ -39,13 +43,13 @@ def enviarMensagem(mensagem, listaMensagens=[]):
     listaMensagens.append(
         {"role": "user", "content": mensagem}    
     )
-
-    resposta = openai.ChatCompletion.create(
+    resposta = client.chat.completions.create( 
+    #resposta = openai.ChatCompletion.create(
         model = "gpt-4o-mini",
         messages = listaMensagens
     )
-
-    return resposta["choices"][0]["message"]
+    return resposta.choices[0].message.content
+    #return resposta["choices"][0]["message"]
 
 with st.container():
     i = 0
@@ -57,7 +61,7 @@ with st.container():
         else:
             resposta = enviarMensagem(texto, listaMensagens)
             listaMensagens.append(resposta)
-            st.write("ArqBot: ", resposta["content"])
+            st.write("ArqBot: ", resposta)
 
     if texto == "fim":
         st.write("ArqBot: Até mais! ArqBot à disposição!")
