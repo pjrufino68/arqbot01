@@ -29,6 +29,7 @@ Caso seja feita alguma pergunta fora do contexto, responda que você tem conheci
 """
 }
 
+resposta = ""
 listaMensagens = []
 listaMensagens.insert(0, assistant_instructions)
 
