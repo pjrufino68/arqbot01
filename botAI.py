@@ -61,9 +61,8 @@ with st.container():
 
 exit_app = st.button("Finalizar")
 if exit_app:
-    keyboard.press_and_release('ctrl+w')
-    #st.stop()
+    #keyboard.press_and_release('ctrl+w')
     pid = os.getpid()
     p = psutil.Process(pid)
     p.terminate()
-
+    st.stop()
