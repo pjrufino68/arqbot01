@@ -59,10 +59,10 @@ with st.container():
     if texto == "fim":
         st.write("ArqBot: Até mais! ArqBot à disposição!")
 
-exit_app = st.button("Finalizar")
-if exit_app:
-    st.success("ArqBot: Operação finalizada. Estou à disposição!")
-    st.stop()
+#exit_app = st.button("Finalizar")
+#if exit_app:
+    #st.success('ArqBot: Operação finalizada. Estou à disposição!')
+    #st.stop()
     #keyboard.press_and_release('ctrl+w')
     #pid = os.getpid()
     #p = psutil.Process(pid)
