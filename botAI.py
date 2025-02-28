@@ -9,9 +9,8 @@ from openai import OpenAI
 
 load_dotenv(override=True)
 
-st.set_page_config(page_title="Pergunte que o ArqBot responde!!!")
-
-#openai.api_key = os.getenv("chaveApi")
+st.set_page_config(page_title="ArqBot responde!!!")
+st.write("# Arquitetura & Interiores")
 
 client = OpenAI(api_key=os.getenv("chaveApi"))
 
@@ -58,12 +57,3 @@ with st.container():
 
     if texto == "fim":
         st.write("ArqBot: Até mais! ArqBot à disposição!")
-
-#exit_app = st.button("Finalizar")
-#if exit_app:
-    #st.success('ArqBot: Operação finalizada. Estou à disposição!')
-    #st.stop()
-    #keyboard.press_and_release('ctrl+w')
-    #pid = os.getpid()
-    #p = psutil.Process(pid)
-    #p.terminate()
