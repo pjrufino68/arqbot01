@@ -9,7 +9,20 @@ from openai import OpenAI
 
 load_dotenv(override=True)
 
+hide_st_style = """
+            <style>
+            #bui1 > div > div > ul >ul:nth-child(1) {visibility: hidden;}
+            #bui1 > div > div > ul >ul:nth-child(2) {visibility: hidden;}
+            #bui1 > div > div > ul >ul:nth-child(4) {visibility: hidden;}
+            #bui1 > div > div > ul >ul:nth-child(5) {visibility: hidden;}
+            #bui1 > div > div > ul >ul:nth-child(7) {visibility: hidden;}
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
 st.set_page_config(page_title="ArqBot responde!!!")
+st.markdown(hide_st_style, unsafe_allow_html=True)
 st.write("# Arquitetura & Interiores")
 
 client = OpenAI(api_key=os.getenv("chaveApi"))
