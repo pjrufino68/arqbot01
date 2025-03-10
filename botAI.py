@@ -45,12 +45,18 @@ Caso seja feita alguma pergunta fora do contexto, responda que você tem conheci
 """
 }
 
-listaMensagens = []
-listaMensagens.insert(0, assistant_instructions)
+lista = []
+lista.insert(0, assistant_instructions)
 
-st.session_state["messages"] = listaMensagens
+st.session_state["messages"] = lista
 
 @st.cache_data
+
+def enviarIA(textoRecebido, lista):
+    lista.append({"role": "user", "content": texto})
+    response = client.chat.completions.create(model="gpt-4o-mini", messages=lista)
+    lista.append(response)
+    return response.choices[0].message.content
 
 def montarIA(textoRecebido):
     st.session_state.messages.append({"role": "user", "content": texto})
@@ -58,15 +64,20 @@ def montarIA(textoRecebido):
     return response.choices[0].message.content    
 
 with st.container():
+    senha = ""
+    senha = st.text_input("Senha: ", type="password", placeholder=None)
     i = 0
-    while True:
-        texto = st.text_input("Faça sua pergunta: ", key=i)
-        i = i + 1
-        if texto == "fim" or len(texto) < 1:
-            break
-        else:
-            msg = montarIA(texto)
-            st.chat_message("assistant").write(msg)
+    texto = ""
+
+    if senha == os.getenv("palavra"):
+        while True:
+            texto = st.text_input("Faça sua pergunta: ", key=i)
+            i = i + 1
+            if texto == "fim" or len(texto) < 1:
+                break
+            else:
+                msg = enviarIA(texto, lista)
+                st.chat_message("assistant").write(msg)
 
     if texto == "fim":
         st.write("ArqBot: Até mais! ArqBot à disposição!")
