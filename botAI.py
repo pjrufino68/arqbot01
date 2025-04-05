@@ -23,7 +23,7 @@ hide_st_style = """
             """
 st.set_page_config(page_title="ArqBot responde!!!")
 st.markdown(hide_st_style, unsafe_allow_html=True)
-st.write("# Arquitetura & Interiores")
+st.write("### 🤖 Arquitetura & Interiores")
 
 client = OpenAI(api_key=os.getenv("chaveApi"))
 
@@ -52,20 +52,20 @@ def montarIA(textoRecebido):
     return response.choices[0].message.content    
 
 with st.container():
-    senha = ""
-    senha = st.text_input("Senha: ", type="password", placeholder=None)
+    #senha = ""
+    #senha = st.text_input("Senha: ", type="password", placeholder=None)
     i = 0
     texto = ""
 
-    if senha == os.getenv("palavra"):
-        while True:
-            texto = st.text_input("Faça sua pergunta: ", key=i)
-            i = i + 1
-            if texto == "fim" or len(texto) < 1:
-                break
-            else:
-                msg = enviarIA(texto, lista)
-                st.chat_message("assistant").write(msg)
+    #if senha == os.getenv("palavra"):
+    while True:
+        texto = st.text_input("Faça sua pergunta: ", key=i)
+        i = i + 1
+        if texto == "fim" or len(texto) < 1:
+            break
+        else:
+            msg = enviarIA(texto, lista)
+            st.chat_message("🤖").write(msg)
 
     if texto == "fim":
         st.write("ArqBot: Até mais! ArqBot à disposição!")
